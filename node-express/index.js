@@ -6,7 +6,7 @@ app.use(express.urlencoded({ extended: true })) // for parsing application/x-www
 
 var myLogger = function (request, response, next) {
 
-  console.log('LOGGED')
+  console.log('Login berhasil')
   next()
 }
 
@@ -20,14 +20,16 @@ app.get('/', function(request, response){
 	const kelas = {
 		id : 1,
 		nama: 'meti'
-		
 	}
-	response.render('pages/index')
+
+	response.render('pages/index',{kelas:kelas})
 })
 app.get('/about', function(request, response){
 	response.render('pages/about')
 })
+
 app.use(userRouter)
+
 app.listen(3000, function(){
 	console.log('server is okay')
 })
