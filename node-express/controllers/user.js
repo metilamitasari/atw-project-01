@@ -18,17 +18,15 @@ module.exports = {
 		response.render('pages/user/create')
 },
 	
-
 	store: function(request, response){
   	users.push({
-  		id : uuidv4(),
   		name :request.body.name,
   		email : request.body.email
-  	})
   	
-  	response.end('/users')
+  }
+  response.redirect('/users')
 },
-update: function(request, response){
+    update:function(request, response){
 	const id = request.params.id
 	users.filter(user => {
 		if(user.id == id) {
@@ -58,7 +56,7 @@ delete:function(request, response){
 		method : request.method,
 		url : request.url
 	})
-	}
+ }
 }
 
 

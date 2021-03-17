@@ -9,6 +9,8 @@ var myLogger = function (request, response, next) {
   console.log('Login berhasil')
   next()
 }
+const mongoose = require('mongoose')
+mongoose.connect('mongodb:localhost/tugas-2', {useNewUrlParser: true, useUnifiedTopology: true})
 
 app.use(myLogger)
 

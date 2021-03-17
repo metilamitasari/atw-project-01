@@ -8,6 +8,7 @@ router.route('/users')
   .post(usercontroller.store)
 
 router.get('/users/create', usercontroller.create)
+
 router.put('/users/:id', usercontroller.update)
 
 router.delete('/users/:useriId', usercontroller.delete)
