@@ -3,14 +3,14 @@ const userRouter = require('./router/users')
 const app = express()
 app.use(express.json()) // for parsing application/json
 app.use(express.urlencoded({ extended: true })) // for parsing application/x-www-form-urlencoded
+const mongoose = require('mongoose')
 
 var myLogger = function (request, response, next) {
 
   console.log('Login berhasil')
   next()
 }
-const mongoose = require('mongoose')
-mongoose.connect('mongodb:localhost/tugas-2', {useNewUrlParser: true, useUnifiedTopology: true})
+mongoose.connect('mongodb://localhost/baledemia', {useNewUrlParser: true, useUnifiedTopology: true})
 
 app.use(myLogger)
 

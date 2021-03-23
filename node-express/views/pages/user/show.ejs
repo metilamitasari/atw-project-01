@@ -1,30 +1,25 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>User</title>
-  <link rel="stylesheet" type="text/css" href="/css/style.css">
-  <link rel="stylesheet" href="/css/bootstrap.css">
+  <title>Show</title>
+  <link rel="stylesheet" type="text/css" href="/style.css">
 </head>
 <body>
-    <div class="card-header mb-5">
-	<%- include('../components/navbar') %>
-    </div>
-<div class="container">
-    <div class="card mb-5">
-        <h2>Detail User</h2>
-        <ul>
-            <li>Nama: <strong><%=user[0].name %></strong></li>
-            <li>Email: <strong><%=user[0].email %></strong></li>
-        </ul>
-        <a href="/users">Kembali</a>
-    </div>
-</div>
+  <%- include('../components/navbar')%>
+  <a href="/users">kembali</a>
+  <H1>User Detail</H1>
+  <ul>
+    
+    
+    <li>name : <strong> <%=user.name%></strong></li>
+    <li>email: <strong>  <%=user.email%></strong></li>
+  </ul>
+
+  <a href="/users/<%=user._id%>/edit">Edit</a>
+  <a href="/users/id">Delete</a>
+
 <footer>
-    <%- include('../components/footer') %>
+  <p>&copy; 2021 Meti Lamitasari</p>
 </footer>
-
-
-
-
 </body>
 </html>

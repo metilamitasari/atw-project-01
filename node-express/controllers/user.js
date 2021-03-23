@@ -1,32 +1,88 @@
-const { v4: uuidv4 } = require('uuid')
+//const { v4: uuidv4 } = require('uuid')
 
-		let users = [
-
-			{id: 1, name:'meti lamitasari', email:'metilamitasari@gmail.com'},
-			{id: 2, name:'yaya', email:'mita@gmail.com'},
-			{id: 3, name:'yaya3', email:'mita3@gmail.com'}
-
-		]
-
+const User = require('../models/user')
+// let users = [
+// 	{id: 1, name: 'Erpi Resty Utari', email: 'restyerpi147@gmail.com'},
+// 	{id: 2, name: 'Sarina', email: 'sarina01@gmail.com'}
+// ]
 
 module.exports = {
-	index:function(request, response){
-		response.render('pages/user/index', {users})
+	index: function(request, response){
+		let keyword = {}
 
-},
-	create :function(request,response){
-		response.render('pages/user/create')
-},
+		if(request.query.keyword){
+			keyword = {name: {$regex: request.query.keyword}} 
+		}
+		//carapertama
+		// User.find(keyword, "name _id", function(error, users){
+		// if(error) console.log(error)
+
+		// console.log(users)
+		// response.render('pages/user/index', {users})	
+		// })
+
+		//carakedua
+		const query = User.find(keyword)
+		query.select('name _id')
+		query.exec(function(error, users){
+			if(error) console.log(error)
+
+		 console.log(users)
+		 response.render('pages/user/index', {users})	
+		
+		})
+		
 	
-	store: function(request, response){
-  	users.push({
-  		name :request.body.name,
-  		email : request.body.email
-  	
-  }
-  response.redirect('/users')
 },
-    update:function(request, response){
+	show: function(request, response){
+		const id = request.params.id
+		// const data = users.filter(user => {
+		// 	return user.id == id
+		// })
+		User.findById(id, function(error, data){
+			if(error) console.log(error)
+				console.log(data)
+			response.render('pages/user/show', {user: data})
+		})
+		
+	},
+	create:function(request,response){
+		response.render('pages/user/create')
+	},
+	store: function(request, response){
+		 const user = new User({
+			name: request.body.name,
+			email: request.body.email,
+			password: request.body.password,
+		})
+
+		 user.save(function(error, data){
+		 	if(error) console.log(error)
+
+		 	console.log(data)
+			response.redirect('/users')	
+		})
+
+		// users.push({
+		// 	id: uuidv4(),
+		// 	name:request.body.name,
+		// 	email: request.body.email
+		// })
+	
+		
+	},
+	
+	Edit:function(request, response){
+		const id = request.params.id
+
+		User.findById(id, function(error, data){
+			if (error) console.log(error)
+			response.render('pages/user/edit',{user: data})
+		})
+	},
+
+
+	update:  function(request, response){
 	const id = request.params.id
 	users.filter(user => {
 		if(user.id == id) {
@@ -37,27 +93,23 @@ module.exports = {
 			return user
 		}
 	})
-		response.json({
-		status:true,
-		data : users,
-		message : 'Data users berhasil diedit',
-		method : request.method,
-		url : request.url
+	response.json({
+		status: true,
+		data: users,
+		message: 'Data users berhasil diedit',
+		method: request.method,
+		url: request.url
 	})
 },
-
-delete:function(request, response){
-	let id = request.params.useriId
-	users=users.filter(user=>user.id !=id)
+	delete: function(request, response){
+	let id = request.params.userId
+	users = users.filter(user => user.id != id)
 	response.send({
-		status:true,
-		data : users,
-		message : 'Data users berhasil dihapus',
-		method : request.method,
-		url : request.url
+		status: true,
+		data: users,
+		message: 'Data users berhasil disimpan',
+		method: request.method,
+		url: request.url
 	})
- }
 }
-
-
-	
+}

@@ -1,24 +1,38 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>User Index</title>
+	<title>User </title>
 	<link rel="stylesheet" type="text/css" href="/css/bootsrrap.css">
 </head>
+<div class="container mt-3">
 <body>
+	<div class="card text-center">
+	  <div class="card-header">
 <%- include('../components/navbar')%>
 <a href="/users/create">Register</a>
 <h1>Daftar User</h1>
+<form action="/users">
+	<input type="text" name="keyword">
+	<button type="submit">Cari</button>
+	
+</form>
 
 <ul>
-	<% if(users.length > 0) { %>
+	<% if (users.length > 0) {%>
 		<% users.forEach(function(user) { %>
-			<li><%=user.name.toUpperCase() %> - <%=user.email %></li>
+			<li><a href="/users/<%=user._id %>">
+				<%=user.name.toUpperCase() %></a> 
+			</li>
 		<% }) %>
+	<% } %>
+		
 
 </ul>
 <footer>
 	<p>&copy; 2021 metilamitasari</p>
 </footer>
+</div>
+</div>
 
 </body>
 </html>
