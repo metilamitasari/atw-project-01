@@ -1,10 +1,7 @@
 //const { v4: uuidv4 } = require('uuid')
 
 const User = require('../models/user')
-// let users = [
-// 	{id: 1, name: 'Erpi Resty Utari', email: 'restyerpi147@gmail.com'},
-// 	{id: 2, name: 'Sarina', email: 'sarina01@gmail.com'}
-// ]
+
 
 module.exports = {
 	index: function(request, response){
